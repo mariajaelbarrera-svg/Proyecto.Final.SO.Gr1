@@ -1,0 +1,20 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# FRONTEND — Nginx sirviendo HTML estático (Grupo 1)
+# ══════════════════════════════════════════════════════════════════════════════
+
+# 1. Imagen base asignada al Grupo 1
+FROM ubuntu:24.04
+
+# 2. Actualizar repositorios e instalar el servidor web Nginx
+RUN apt-get update && \
+    apt-get install -y nginx && \
+    rm -rf /var/lib/apt/lists/*
+
+# 3. Copiar tu archivo HTML personalizado a la ruta oficial de Ubuntu/Debian
+COPY index.html /var/www/html/index.html
+
+# 4. Exponer el puerto estándar del servidor web
+EXPOSE 80
+
+# 5. Comando para ejecutar Nginx en primer plano (obligatorio para contenedores)
+CMD ["nginx", "-g", "daemon off;"]
