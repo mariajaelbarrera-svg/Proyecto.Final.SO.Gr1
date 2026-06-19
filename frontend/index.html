@@ -1,1 +1,129 @@
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Final - Sistemas Operativos - Grupo 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #a8d8ff;
+            font-weight: 300;
+        }
+        
+        .info {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        
+        .info p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        
+        .status {
+            display: inline-block;
+            background: #4caf50;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #a8d8ff;
+        }
+        
+        .group-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+        
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Frontend Activo</h1>
+        <h2>Proyecto Final — Sistemas Operativos</h2>
+        
+        <div class="info">
+            <p><strong>Componente 2:</strong> Contenedores Docker</p>
+            <p><strong>Servicio:</strong> Nginx (Frontend)</p>
+            <p><strong>Puerto:</strong> 80</p>
+        </div>
+        
+        <div class="status">✓ FUNCIONANDO</div>
+        
+        <div class="group-info">
+            <p><strong>Grupo:</strong> <code>Grupo 1</code></p>
+            <p><strong>Distribución:</strong> <code>Ubuntu 24.04 LTS / Debian 13.5</code></p>
+            <p><strong>Imagen Docker:</strong> <code>ubuntu:24.04</code></p>
+        </div>
+        
+        <div class="footer">
+            <p>Sistemas Operativos 750001C</p>
+            <p>Universidad del Valle • Semestre 1-2026</p>
+        </div>
+    </div>
+    
+    <script>
+        // Verificación de comunicación con el Backend (Python)
+        fetch('http://localhost:5000')
+            .then(response => response.json())
+            .then(data => console.log('Backend respondió:', data))
+            .catch(error => console.log('Backend no disponible:', error));
+    </script>
+</body>
+</html>
