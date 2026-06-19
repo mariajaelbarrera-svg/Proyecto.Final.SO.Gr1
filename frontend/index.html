@@ -19,111 +19,115 @@
             justify-content: center;
             align-items: center;
             color: #ffffff;
+            padding: 20px;
         }
         
         .container {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            padding: 3rem;
+            padding: 2.5rem;
             border-radius: 20px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
+            max-width: 700px;
             text-align: center;
         }
         
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
+        h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        h2 { font-size: 1.3rem; margin-bottom: 1.5rem; color: #a8d8ff; font-weight: 300; }
         
-        h2 {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            color: #a8d8ff;
-            font-weight: 300;
-        }
-        
-        .info {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 1.5rem;
+        .team-table {
+            width: 100%;
+            margin: 1.5rem 0;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
-            margin: 2rem 0;
+            overflow: hidden;
         }
         
-        .info p {
-            margin: 0.5rem 0;
-            font-size: 1.1rem;
+        .team-table th, .team-table td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
         }
         
-        .status {
+        .team-table th { background: rgba(255, 255, 255, 0.1); color: #ffd700; }
+
+        .status-box {
             display: inline-block;
-            background: #4caf50;
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
+            background: #ff4d4d; /* Rojo por defecto (Error) */
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
             font-weight: bold;
-            margin-top: 1rem;
-            animation: pulse 2s infinite;
+            margin: 1rem 0;
+            transition: background 0.5s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        .footer {
-            margin-top: 2rem;
-            font-size: 0.9rem;
-            color: #a8d8ff;
-        }
+        .status-online { background: #4caf50; } /* Verde para éxito */
         
         .group-info {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.2rem;
             border-radius: 8px;
             margin-top: 1.5rem;
+            font-size: 1rem;
         }
         
-        code {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #ffd700;
-        }
+        code { color: #ffd700; font-family: monospace; font-size: 1.1rem; }
+        .footer { margin-top: 1.5rem; font-size: 0.85rem; color: #a8d8ff; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🚀 Frontend Activo</h1>
-        <h2>Proyecto Final — Sistemas Operativos</h2>
+        <h2>Sistemas Operativos 750001C</h2>
         
-        <div class="info">
-            <p><strong>Componente 2:</strong> Contenedores Docker</p>
-            <p><strong>Servicio:</strong> Nginx (Frontend)</p>
-            <p><strong>Puerto:</strong> 80</p>
+        <table class="team-table">
+            <thead>
+                <tr><th>Integrante</th><th>Código</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Duber Alvarez Ruiz</td><td>2260403</td></tr>
+                <tr><td>Maria Jael Barrera Gómez</td><td>2369181</td></tr>
+                <tr><td>Gustavo Adolfo Chilito</td><td>20XXXXXX</td></tr>
+                <tr><td>Bradley Suescun Ramírez</td><td>2478054</td></tr>
+            </tbody>
+        </table>
+
+        <!-- Cuadro de estado dinámico -->
+        <div id="backend-card" class="status-box">
+            <span id="api-status">Esperando conexión con Backend...</span>
         </div>
         
-        <div class="status">✓ FUNCIONANDO</div>
-        
         <div class="group-info">
-            <p><strong>Grupo:</strong> <code>Grupo 1</code></p>
-            <p><strong>Distribución:</strong> <code>Ubuntu 24.04 LTS / Debian 13.5</code></p>
-            <p><strong>Imagen Docker:</strong> <code>ubuntu:24.04</code></p>
+            <p><strong>Grupo Asignado:</strong> <code>Grupo 1</code></p>
+            <p><strong>Distribuciones:</strong> <code>Ubuntu 24.04 / Debian 13.5</code></p>
+            <p><strong>Imagen Base:</strong> <code>ubuntu:24.04</code></p>
         </div>
         
         <div class="footer">
-            <p>Sistemas Operativos 750001C</p>
-            <p>Universidad del Valle • Semestre 1-2026</p>
+            <p>Universidad del Valle • Sede Regional Palmira</p>
+            <p>Facultad de Ingeniería — Componente 2: Docker</p>
         </div>
     </div>
-    
+
     <script>
-        // Verificación de comunicación con el Backend (Python)
+        // Lógica mejorada para mostrar el estado del backend en pantalla
+        const statusBox = document.getElementById('backend-card');
+        const statusText = document.getElementById('api-status');
+
         fetch('http://localhost:5000')
             .then(response => response.json())
-            .then(data => console.log('Backend respondió:', data))
-            .catch(error => console.log('Backend no disponible:', error));
+            .then(data => {
+                // Si hay respuesta exitosa, cambiamos a verde y mostramos el mensaje del JSON
+                statusBox.classList.add('status-online');
+                statusText.innerHTML = `✅ Backend Online: ${data.mensaje} (Status: ${data.status})`;
+            })
+            .catch(error => {
+                // Si falla, se queda en rojo y muestra el error
+                statusText.innerHTML = "❌ Error: Backend (Puerto 5000) no disponible";
+                console.error('Error de conexión:', error);
+            });
     </script>
 </body>
 </html>
