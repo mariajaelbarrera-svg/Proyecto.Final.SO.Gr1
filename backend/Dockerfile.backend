@@ -1,0 +1,23 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# BACKEND — Servidor HTTP Python (Grupo 1)
+# ══════════════════════════════════════════════════════════════════════════════
+
+# 1. Imagen base asignada al Grupo 1
+FROM ubuntu:24.04
+
+# 2. Actualizar repositorios e instalar Python 3
+RUN apt-get update && \
+    apt-get install -y python3 && \
+    rm -rf /var/lib/apt/lists/*
+
+# 3. Crear directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# 4. Copiar tu script de Python (server.py) al directorio de trabajo
+COPY server.py .
+
+# 5. Exponer el puerto 5000 (obligatorio para el Componente 2)
+EXPOSE 5000
+
+# 6. Comando para ejecutar el servidor de Python
+CMD ["python3", "server.py"]
