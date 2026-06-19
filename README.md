@@ -10,7 +10,7 @@
 |--------|--------|-----|
 | Duber Alvarez Ruiz | 2260403 | Virtualización |
 | Maria Jael Barrera Gómez | 2369181 | Sitio web |
-| Gustavo Adolfo Chilito | 20XXXXXX | Video + Presentación |
+| Gustavo Adolfo Chilito | 202266901| Video + Presentación |
 | Bradley Suescun Ramírez | 2478054 | Contenedores Docker + Orquestación con Kubernetes |
 
 **Grupo asignado:** Grupo 1  
