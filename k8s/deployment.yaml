@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-grupo1          
+  name: nginx-deployment         
   labels:
     app: nginx
     grupo: "1"               
