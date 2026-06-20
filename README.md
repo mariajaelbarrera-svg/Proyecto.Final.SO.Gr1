@@ -11,7 +11,7 @@
 | Duber Alvarez Ruiz | 2260403 | Virtualización |
 | Maria Jael Barrera Gómez | 2369181 | Sitio web |
 | Gustavo Adolfo Chilito | 202266901| Video + Sitio Web |
-| Bradley Suescun Ramírez | 2478054 | Contenedores Docker + Orquestación con Kubernetes |
+| Bradley Suescun Ramírez | 202478054 | Contenedores Docker + Orquestación con Kubernetes |
 
 **Grupo asignado:** Grupo 1  
 **Distribución gráfica:** Ubuntu 24.04 LTS  
