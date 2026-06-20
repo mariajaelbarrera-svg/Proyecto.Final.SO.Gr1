@@ -1,145 +1,428 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Final SO - Grupo 1 </title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            min-height: 100vh;
-            color: #ffffff;
-            line-height: 1.6;
-        }
-        nav {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        nav a { color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
-        nav a:hover { color: #ffd700; }
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            max-width: 1000px;
-            margin: 2rem auto;
-        }
-        h1, h2, h3 { margin-bottom: 1rem; text-align: center; }
-        h1 { color: #ffffff; font-size: 2.2rem; }
-        h2 { color: #a8d8ff; font-weight: 300; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; margin-top: 2rem; }
-        .team-table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; margin: 1.5rem 0; }
-        .team-table th, .team-table td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .team-table th { background: rgba(255,255,255,0.1); color: #ffd700; }
-        code { background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; color: #ffd700; font-family: monospace; }
-        .evidence-img { width: 100%; border-radius: 10px; margin: 1rem 0; border: 1px solid rgba(255,255,255,0.2); }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; margin: 2rem 0; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px; }
-        footer { text-align: center; padding: 2rem; color: #a8d8ff; font-size: 0.85rem; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyecto Final SO — Grupo 1</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --blue1:#1e3c72; --blue2:#2a5298; --gold:#ffd700; --accent:#a8d8ff;
+    --glass: rgba(255,255,255,0.08); --glass-brd: rgba(255,255,255,0.15);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    background:linear-gradient(135deg,var(--blue1) 0%,var(--blue2) 100%);
+    background-attachment:fixed;
+    min-height:100vh; color:#fff; line-height:1.7;
+  }
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--gold);width:0%;z-index:2000;transition:width .1s}
+  nav{
+    background:rgba(13,20,40,0.55); backdrop-filter:blur(14px);
+    padding:.9rem 1rem; position:sticky; top:0; z-index:1000;
+    display:flex; justify-content:center; gap:6px; flex-wrap:wrap;
+    border-bottom:1px solid var(--glass-brd);
+  }
+  nav a{
+    color:rgba(255,255,255,0.75); text-decoration:none; font-weight:600;
+    font-size:.82rem; padding:7px 14px; border-radius:20px;
+    display:flex; align-items:center; gap:6px; transition:all .2s;
+  }
+  nav a i{font-size:.85rem}
+  nav a:hover{ color:#fff; background:rgba(255,255,255,0.1); }
+  nav a.active{ color:#1e3c72; background:var(--gold); }
+  .container{
+    background:var(--glass); backdrop-filter:blur(12px);
+    padding:2.5rem; border-radius:20px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.3); border:1px solid var(--glass-brd);
+    max-width:1000px; margin:2.5rem auto; opacity:0; transform:translateY(30px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .container.visible{ opacity:1; transform:translateY(0); }
+  .sec-icon{
+    width:56px;height:56px;border-radius:50%;
+    background:rgba(255,215,0,0.15); border:1px solid rgba(255,215,0,0.4);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; color:var(--gold); margin:0 auto 1rem;
+  }
+  h1,h2,h3{ text-align:center }
+  h1{ font-size:clamp(1.8rem,5vw,2.6rem); margin-bottom:.4rem; }
+  h2{
+    color:var(--accent); font-weight:600; font-size:1.5rem;
+    border-bottom:1px solid var(--glass-brd); padding-bottom:14px; margin-bottom:1.4rem;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+  }
+  h3{ font-weight:300; color:var(--accent); margin-bottom:1rem; }
+  p{ margin-bottom:.6rem }
+  .hero-badge{
+    display:inline-block; background:rgba(255,215,0,0.12); border:1px solid rgba(255,215,0,0.4);
+    color:var(--gold); padding:5px 16px; border-radius:20px; font-size:.78rem;
+    letter-spacing:.05em; text-transform:uppercase; margin-bottom:1.2rem;
+  }
+  .hero-stats{display:flex;justify-content:center;gap:14px;margin-top:1.6rem;flex-wrap:wrap}
+  .hero-stat{background:rgba(255,255,255,0.06);border:1px solid var(--glass-brd);border-radius:12px;padding:.8rem 1.2rem;min-width:120px}
+  .hero-stat i{color:var(--gold);font-size:1.1rem;margin-bottom:4px;display:block}
+  .hero-stat span{font-size:.75rem;color:var(--accent);display:block}
+  .hero-stat strong{font-size:.95rem;display:block;margin-top:2px}
+  .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:1.4rem}
+  .member-card{
+    background:rgba(255,255,255,0.06); border:1px solid var(--glass-brd); border-radius:16px;
+    padding:1.4rem 1rem; text-align:center; transition:transform .25s, border-color .25s;
+  }
+  .member-card:hover{ transform:translateY(-5px); border-color:var(--gold); }
+  .m-avatar{
+    width:58px;height:58px;border-radius:50%;background:rgba(255,215,0,0.15);
+    border:2px solid var(--gold); display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:1.1rem;color:var(--gold);margin:0 auto .7rem;
+  }
+  .m-name{font-weight:600;font-size:.95rem}
+  .m-code{font-size:.72rem;color:var(--accent);margin:3px 0 8px;font-family:monospace}
+  .m-role{
+    display:inline-flex; align-items:center; gap:5px; font-size:.7rem;
+    padding:4px 11px; border-radius:20px; font-weight:600; text-transform:uppercase; letter-spacing:.03em;
+  }
+  .role-virt{background:rgba(0,180,216,.18);color:#7fdfff}
+  .role-doc{background:rgba(168,216,255,.18);color:#a8d8ff}
+  .role-docker{background:rgba(247,127,0,.2);color:#ffb877}
+  .distro-row{display:flex;justify-content:center;gap:14px;margin-top:1.2rem;flex-wrap:wrap}
+  .distro-chip{
+    background:rgba(255,255,255,0.07); border:1px solid var(--glass-brd); border-radius:24px;
+    padding:8px 18px; font-size:.85rem; display:flex; align-items:center; gap:8px;
+  }
+  .distro-chip i{color:var(--gold)}
+  code{background:rgba(0,0,0,0.35);padding:3px 8px;border-radius:5px;color:var(--gold);font-family:'Cascadia Code',monospace;font-size:.85em}
+  .cmd-list{list-style:none;margin-top:1rem}
+  .cmd-list li{
+    background:rgba(0,0,0,0.2); border-left:3px solid var(--gold); border-radius:8px;
+    padding:10px 14px; margin-bottom:8px; font-size:.88rem; display:flex; align-items:center; gap:10px;
+  }
+  .cmd-list li i{color:var(--gold); width:18px; text-align:center}
+  .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:1.2rem 0}
+  .feature-card{
+    background:rgba(255,255,255,0.05); border:1px solid var(--glass-brd); border-radius:14px;
+    padding:1.1rem; display:flex; gap:12px; align-items:flex-start;
+  }
+  .feature-card i{font-size:1.3rem;color:var(--gold);margin-top:2px}
+  .feature-card strong{display:block;font-size:.92rem;margin-bottom:2px}
+  .feature-card span{font-size:.82rem;color:var(--accent)}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:1.4rem}
+  .gallery figure{margin:0;cursor:zoom-in;position:relative;overflow:hidden;border-radius:12px;border:1px solid var(--glass-brd);background:rgba(0,0,0,.2)}
+  .gallery img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;transition:transform .3s}
+  .gallery figure:hover img{transform:scale(1.06)}
+  .gallery figcaption{
+    position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.75));
+    padding:18px 10px 8px;font-size:.78rem;text-align:center;
+  }
+  .gallery figure::after{
+    content:'\f00e'; font-family:'Font Awesome 6 Free'; font-weight:900;
+    position:absolute;top:8px;right:8px;background:rgba(0,0,0,.5);color:#fff;
+    width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:.7rem;opacity:0;transition:opacity .2s;
+  }
+  .gallery figure:hover::after{opacity:1}
+  .missing-note{
+    background:rgba(255,80,80,0.1); border:1px dashed rgba(255,120,120,0.5); border-radius:12px;
+    padding:1rem 1.3rem; font-size:.83rem; color:#ffb3b3; margin-top:1rem;
+  }
+  .missing-note strong{display:block;color:#fff;margin-bottom:4px;font-size:.86rem}
+  .missing-note code{color:#ffd1d1}
+  #lightbox{
+    position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;
+    align-items:center;justify-content:center;z-index:3000;padding:2rem;
+  }
+  #lightbox.show{display:flex}
+  #lightbox img{max-width:92%;max-height:88%;border-radius:10px;box-shadow:0 0 40px rgba(0,0,0,.6)}
+  #lightbox .lb-close{position:absolute;top:20px;right:30px;font-size:1.8rem;color:#fff;cursor:pointer}
+  #lightbox .lb-cap{position:absolute;bottom:24px;left:0;right:0;text-align:center;color:#ccc;font-size:.9rem}
+  .video-container{position:relative;padding-bottom:56.25%;height:0;margin-top:1.4rem;border-radius:14px;overflow:hidden;border:1px solid var(--glass-brd)}
+  .video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%}
+  .conc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:1.2rem}
+  .conc-card{background:rgba(255,255,255,0.06);border:1px solid var(--glass-brd);border-radius:14px;padding:1.3rem}
+  .conc-card i{font-size:1.5rem;color:var(--gold);margin-bottom:.5rem;display:block}
+  .conc-card strong{display:block;margin-bottom:4px;font-size:.95rem}
+  .conc-card p{font-size:.86rem;color:var(--accent);margin:0}
+  footer{text-align:center;padding:2.5rem 1rem;color:var(--accent);font-size:.82rem}
+  footer i{color:var(--gold);margin-right:6px}
+  #toTop{
+    position:fixed;bottom:24px;right:24px;width:46px;height:46px;border-radius:50%;
+    background:var(--gold);color:#1e3c72;border:none;font-size:1.1rem;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;
+    transition:opacity .25s,transform .25s;z-index:1500;box-shadow:0 4px 14px rgba(0,0,0,.3);
+  }
+  #toTop.show{opacity:1;pointer-events:auto}
+  #toTop:hover{transform:translateY(-3px)}
+  @media(max-width:640px){
+    nav{gap:2px}
+    nav a{font-size:.74rem;padding:6px 10px}
+    .container{padding:1.6rem;margin:1.4rem;border-radius:16px}
+  }
+</style>
 </head>
 <body>
 
-<nav>
-    <a href="#home">Home</a>
-    <a href="#equipo">Equipo</a>
-    <a href="#componente1">C1: Virtualización</a>
-    <a href="#componente2">C2: Docker</a>
-    <a href="#componente3">C3: Kubernetes</a>
-    <a href="#video">Video</a>
-    <a href="#arquitectura">Arquitectura</a>
-    <a href="#conclusiones">Conclusiones</a>
+<div id="progress"></div>
+
+<nav id="navbar">
+  <a href="#home" data-sec="home"><i class="fa-solid fa-house"></i>Home</a>
+  <a href="#equipo" data-sec="equipo"><i class="fa-solid fa-users"></i>Equipo</a>
+  <a href="#componente1" data-sec="componente1"><i class="fa-solid fa-server"></i>C1</a>
+  <a href="#componente2" data-sec="componente2"><i class="fa-brands fa-docker"></i>C2</a>
+  <a href="#componente3" data-sec="componente3"><i class="fa-solid fa-dharmachakra"></i>C3</a>
+  <a href="#video" data-sec="video"><i class="fa-brands fa-youtube"></i>Video</a>
+  <a href="#arquitectura" data-sec="arquitectura"><i class="fa-solid fa-diagram-project"></i>Arquitectura</a>
+  <a href="#conclusiones" data-sec="conclusiones"><i class="fa-solid fa-lightbulb"></i>Conclusiones</a>
 </nav>
 
+<!-- ════════ HOME ════════ -->
 <div class="container" id="home">
-    <h1>Proyecto Final</h1>
-    <h3>Sistemas Operativos 750001C</h3>
-    <p>Este proyecto integra la configuración de entornos virtuales, contenedores desacoplados y orquestación con Kubernetes para desplegar una infraestructura robusta y escalable.</p>
+  <div class="hero-badge">Sistemas Operativos 750001C · Semestre 1 – 2026</div>
+  <h1>Proyecto Final — Arquitecto Cloud</h1>
+  <h3>Grupo 1 · Universidad del Valle</h3>
+  <p style="max-width:620px;margin:0 auto;text-align:center">
+    Este proyecto integra la configuración de entornos virtuales, contenedores desacoplados
+    y orquestación con Kubernetes para desplegar una infraestructura robusta y escalable.
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat"><i class="fa-solid fa-desktop"></i><span>VM Gráfica</span><strong>Ubuntu 24.04</strong></div>
+    <div class="hero-stat"><i class="fa-solid fa-terminal"></i><span>VM Consola</span><strong>Debian 13.5</strong></div>
+    <div class="hero-stat"><i class="fa-brands fa-docker"></i><span>Imagen base</span><strong>ubuntu:24.04</strong></div>
+    <div class="hero-stat"><i class="fa-solid fa-dharmachakra"></i><span>Orquestación</span><strong>Minikube</strong></div>
+  </div>
 </div>
 
+<!-- ════════ EQUIPO ════════ -->
 <div class="container" id="equipo">
-    <h2>👥 Nuestro Equipo - Grupo 1</h2>
-    <table class="team-table">
-        <thead>
-            <tr><th>Integrante</th><th>Código</th><th>Rol Principal</th></tr>
-        </thead>
-        <tbody>
-            <tr><td>Duber Alvarez Ruiz</td><td>2260403</td><td>Virtualización</td></tr>
-            <tr><td>Maria Jael Barrera Gómez</td><td>2369181</td><td>Documentación + Sitio Web</td></tr>
-            <tr><td>Gustavo Adolfo Chilito</td><td>2266901</td><td>Documentación + Sitio Webr</td></tr>
-            <tr><td>Bradley Suescun Ramírez</td><td>2478054</td><td>Contenedores Docker + Orquestación con Kubernetes</td></tr>
-        </tbody>
-    </table>
-    <p><strong>Distribuciones:</strong> <code>Ubuntu 24.04 (Gráfica)</code> / <code>Debian 13.5 (Consola)</code></p>
-</div>
-
-<div class="container" id="componente1">
-    <h2>Componente 1: Virtualización</h2>
-    <p>Instalación y configuración de dos nodos independientes con aislamiento de red y acceso seguro vía SSH.</p>
-    <ul>
-        <li><strong>Comandos clave:</strong> <code>ip a</code>, <code>lsblk</code>, <code>ssh usuario@ip</code></li>
-    </ul>
-    <div class="evidence-box">
-  <strong>📸 Configuración inicial — Debian 13.5</strong>
-  <img src="mv_debian/configuracion%20inicial.png" alt="Configuración inicial VM Debian" style="width:100%;margin-top:10px;border-radius:8px;border:1px solid var(--border);">
-</div>
-
-<div class="container" id="componente2">
-    <h2>🐳 Componente 2: Contenedores Docker</h2>
-    <p>Orquestación de microservicios desacoplados (Nginx + Python) usando Docker Compose y volúmenes persistentes.</p>
-    <ul>
-        <li><strong>Frontend:</strong> Nginx en puerto 8080 (mapeado al 80).</li>
-        <li><strong>Backend:</strong> Python API en puerto 5000.</li>
-    </ul>
-    <img src="evidencias/Captura de pantalla 2026-06-19 205333.png" alt="Estado Contenedores" class="evidence-img">
-    <img src="evidencias/Captura de pantalla 2026-06-19 205348.png" alt="Estructura de Archivos" class="evidence-img">
-</div>
-
-<div class="container" id="componente3">
-    <h2>☸️ Componente 3: Kubernetes</h2>
-    <p>Despliegue escalable en Minikube con servicios NodePort y alta disponibilidad.</p>
-    <ul>
-        <li><strong>Servicio:</strong> NodePort expuesto en puerto <code>30080</code>.</li>
-        <li><strong>Escalabilidad:</strong> 3 réplicas activas verificadas.</li>
-    </ul>
-    <img src="evidencias/Captura de pantalla 2026-06-19 205402.png" alt="Pods y Escalado" class="evidence-img">
-    <img src="evidencias/Captura de pantalla 2026-06-19 205409.png" alt="Acceso Web K8s" class="evidence-img">
-</div>
-
-<div class="container" id="video">
-    <h2>🎥 Video Demostrativo</h2>
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/TU_ID_DE_VIDEO" frameborder="0" allowfullscreen></iframe>
+  <h2><i class="fa-solid fa-users"></i>Nuestro equipo — Grupo 1</h2>
+  <div class="team-grid">
+    <div class="member-card">
+      <div class="m-avatar">DA</div>
+      <div class="m-name">Duber Alvarez Ruiz</div>
+      <div class="m-code">Cód. 2260403</div>
+      <span class="m-role role-virt"><i class="fa-solid fa-server"></i>Virtualización</span>
     </div>
+    <div class="member-card">
+      <div class="m-avatar">MJ</div>
+      <div class="m-name">Maria Jael Barrera Gómez</div>
+      <div class="m-code">Cód. 2369181</div>
+      <span class="m-role role-doc"><i class="fa-solid fa-globe"></i>Documentación + Sitio Web</span>
+    </div>
+    <div class="member-card">
+      <div class="m-avatar">GC</div>
+      <div class="m-name">Gustavo Adolfo Chilito</div>
+      <div class="m-code">Cód. 2266901</div>
+      <span class="m-role role-doc"><i class="fa-solid fa-globe"></i>Documentación + Sitio Web</span>
+    </div>
+    <div class="member-card">
+      <div class="m-avatar">BS</div>
+      <div class="m-name">Bradley Suescun Ramírez</div>
+      <div class="m-code">Cód. 2478054</div>
+      <span class="m-role role-docker"><i class="fa-brands fa-docker"></i>Docker + Kubernetes</span>
+    </div>
+  </div>
+  <div class="distro-row">
+    <div class="distro-chip"><i class="fa-brands fa-ubuntu"></i>Ubuntu 24.04 LTS (Gráfica)</div>
+    <div class="distro-chip"><i class="fa-solid fa-server"></i>Debian 13.5 (Consola)</div>
+  </div>
 </div>
 
+<!-- ════════ COMPONENTE 1 ════════ -->
+<div class="container" id="componente1">
+  <div class="sec-icon"><i class="fa-solid fa-server"></i></div>
+  <h2><i class="fa-solid fa-network-wired"></i>Componente 1: Virtualización</h2>
+  <p style="text-align:center;max-width:640px;margin:0 auto 1rem">
+    Instalación y configuración de dos nodos independientes con aislamiento de red,
+    particionamiento manual y acceso seguro vía SSH entre ambas máquinas virtuales.
+  </p>
+  <ul class="cmd-list">
+    <li><i class="fa-solid fa-network-wired"></i><code>ip a</code> — Ver interfaces de red y direcciones IP</li>
+    <li><i class="fa-solid fa-hard-drive"></i><code>lsblk</code> — Ver estructura de particiones</li>
+    <li><i class="fa-solid fa-right-to-bracket"></i><code>ssh usuario@ip_vm_consola</code> — Conexión SSH entre VMs</li>
+  </ul>
+
+  <h3 style="margin-top:1.6rem"><i class="fa-solid fa-images"></i> Evidencias</h3>
+  <div class="gallery">
+    <figure onclick="openLightbox(this)">
+      <img src="evidencias/mv_debian/configuracion%20inicial.png" alt="Configuración inicial Debian">
+      <figcaption>Configuración inicial</figcaption>
+    </figure>
+    <figure onclick="openLightbox(this)">
+      <img src="evidencias/mv_debian/particionamiento%20final.png" alt="Particionamiento final">
+      <figcaption>Particionamiento final</figcaption>
+    </figure>
+  </div>
+</div>
+
+<!-- ════════ COMPONENTE 2 ════════ -->
+<div class="container" id="componente2">
+  <div class="sec-icon"><i class="fa-brands fa-docker"></i></div>
+  <h2><i class="fa-brands fa-docker"></i>Componente 2: Contenedores Docker</h2>
+  <p style="text-align:center;max-width:640px;margin:0 auto 1rem">
+    Orquestación de microservicios desacoplados (Nginx + Python) usando Docker Compose y volúmenes persistentes.
+  </p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <i class="fa-solid fa-globe"></i>
+      <div><strong>Frontend</strong><span>Nginx sirviendo HTML estático en el puerto 80</span></div>
+    </div>
+    <div class="feature-card">
+      <i class="fa-brands fa-python"></i>
+      <div><strong>Backend</strong><span>API HTTP en Python en el puerto 5000</span></div>
+    </div>
+  </div>
+
+  <ul class="cmd-list">
+    <li><i class="fa-solid fa-play"></i><code>docker compose up -d</code> — Levantar servicios</li>
+    <li><i class="fa-solid fa-box"></i><code>docker ps</code> — Ver contenedores activos</li>
+    <li><i class="fa-solid fa-magnifying-glass"></i><code>curl http://localhost:5000</code> — Probar backend</li>
+  </ul>
+
+  <h3 style="margin-top:1.6rem"><i class="fa-solid fa-images"></i> Evidencias</h3>
+  <div class="gallery">
+    <figure onclick="openLightbox(this)">
+      <img src="evidencias/componente2/docker_version.png.jpeg" alt="Versión de Docker">
+      <figcaption>Versión de Docker instalada</figcaption>
+    </figure>
+    <figure onclick="openLightbox(this)">
+      <img src="evidencias/componente2/docker_compose_up_estado_y_estructura.png.jpeg" alt="Docker compose up - estado y estructura">
+      <figcaption>Docker compose up — estado y estructura</figcaption>
+    </figure>
+  </div>
+</div>
+
+<!-- ════════ COMPONENTE 3 ════════ -->
+<div class="container" id="componente3">
+  <div class="sec-icon"><i class="fa-solid fa-dharmachakra"></i></div>
+  <h2><i class="fa-solid fa-dharmachakra"></i>Componente 3: Kubernetes</h2>
+  <p style="text-align:center;max-width:640px;margin:0 auto 1rem">
+    Despliegue escalable en Minikube con servicios NodePort y alta disponibilidad mediante réplicas.
+  </p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <i class="fa-solid fa-plug"></i>
+      <div><strong>Servicio NodePort</strong><span>Expuesto en el puerto 30080</span></div>
+    </div>
+    <div class="feature-card">
+      <i class="fa-solid fa-layer-group"></i>
+      <div><strong>Escalabilidad</strong><span>3 réplicas activas verificadas</span></div>
+    </div>
+  </div>
+
+  <ul class="cmd-list">
+    <li><i class="fa-solid fa-power-off"></i><code>minikube start</code> — Iniciar el cluster</li>
+    <li><i class="fa-solid fa-list"></i><code>kubectl get pods</code> — Listar pods</li>
+    <li><i class="fa-solid fa-arrows-up-down"></i><code>kubectl scale deployment nginx --replicas=3</code> — Escalar</li>
+  </ul>
+
+  <h3 style="margin-top:1.6rem"><i class="fa-solid fa-images"></i> Evidencias</h3>
+  <div class="gallery">
+    <figure onclick="openLightbox(this)">
+      <img src="evidencias/componente3/k8s_acceso_navegador_nodeport_30080.png.jpeg" alt="Acceso navegador NodePort 30080">
+      <figcaption>Acceso vía navegador — NodePort 30080</figcaption>
+    </figure>
+    <figure onclick="openLightbox(this)">
+      <img src="evidencias/componente3/k8s_estado_pods_svc_y_escalado_manual.png.jpeg" alt="Estado de pods, svc y escalado manual">
+      <figcaption>Estado de pods, svc y escalado manual</figcaption>
+    </figure>
+  </div>
+</div>
+
+<!-- ════════ VIDEO ════════ -->
+<div class="container" id="video">
+  <div class="sec-icon"><i class="fa-brands fa-youtube"></i></div>
+  <h2><i class="fa-brands fa-youtube"></i>Video demostrativo</h2>
+  <div class="video-container">
+    <!-- AJUSTA: reemplaza TU_ID_DE_VIDEO con el ID real de tu video de YouTube -->
+    <iframe src="https://www.youtube.com/embed/TU_ID_DE_VIDEO" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- ════════ ARQUITECTURA ════════ -->
 <div class="container" id="arquitectura">
-    <h2>📊 Diagrama de Arquitectura</h2>
-    <img src="evidencias/imagen_2026-06-19_204650162.png" alt="Arquitectura del Sistema" class="evidence-img">
+  <div class="sec-icon"><i class="fa-solid fa-diagram-project"></i></div>
+  <h2><i class="fa-solid fa-diagram-project"></i>Diagrama de arquitectura</h2>
+  <div class="gallery" style="grid-template-columns:1fr">
+    <figure onclick="openLightbox(this)">
+      <img src="evidencias/DiagramaArquitectura/diagrama%20de%20arquitectura%202.png" alt="Arquitectura del sistema" style="aspect-ratio:16/9">
+      <figcaption>Arquitectura general del sistema</figcaption>
+    </figure>
+  </div>
+  <div class="missing-note">
+    <strong>ℹ️ Archivo "Diagrama" sin extensión visible</strong>
+    En la carpeta también hay un archivo llamado solo <code>Diagrama</code> (sin .png/.jpg visible) — probablemente es el archivo fuente editable (ej. draw.io) y no una imagen para mostrar en la web. Si sí es una imagen, dime su extensión exacta y la agrego.
+  </div>
 </div>
 
+<!-- ════════ CONCLUSIONES ════════ -->
 <div class="container" id="conclusiones">
-    <h2>Conclusiones</h2>
-    <p><strong>Aprendizaje:</strong> La orquestación con Kubernetes permite una gestión de fallos automática inalcanzable con contenedores individuales.</p>
-    <p><strong>Dificultad:</strong> El mapeo de puertos entre el host físico y el clúster de Minikube requirió ajustes en las reglas de firewall.</p>
-    <p><strong>Recomendación:</strong> Implementar un pipeline de CI/CD para automatizar las actualizaciones del frontend.</p>
+  <div class="sec-icon"><i class="fa-solid fa-lightbulb"></i></div>
+  <h2><i class="fa-solid fa-lightbulb"></i>Conclusiones</h2>
+  <div class="conc-grid">
+    <div class="conc-card">
+      <i class="fa-solid fa-graduation-cap"></i>
+      <strong>Aprendizaje</strong>
+      <p>La orquestación con Kubernetes permite una gestión de fallos automática inalcanzable con contenedores individuales.</p>
+    </div>
+    <div class="conc-card">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <strong>Dificultad</strong>
+      <p>El mapeo de puertos entre el host físico y el clúster de Minikube requirió ajustes en las reglas de firewall.</p>
+    </div>
+    <div class="conc-card">
+      <i class="fa-solid fa-rocket"></i>
+      <strong>Recomendación</strong>
+      <p>Implementar un pipeline de CI/CD para automatizar las actualizaciones del frontend.</p>
+    </div>
+  </div>
 </div>
 
 <footer>
-    <p>Universidad del Valle • Sede Yumbo • 2026</p>
-    <p>Facultad de Ingeniería - Sistemas Operativos</p>
+  <p><i class="fa-solid fa-graduation-cap"></i>Universidad del Valle · Sede Yumbo · 2026</p>
+  <p><i class="fa-solid fa-book"></i>Facultad de Ingeniería — Sistemas Operativos 750001C</p>
 </footer>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up"></i></button>
+
+<div id="lightbox" onclick="closeLightbox(event)">
+  <span class="lb-close" onclick="closeLightbox(event)"><i class="fa-solid fa-xmark"></i></span>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-cap" id="lb-cap"></div>
+</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+    document.getElementById('toTop').classList.toggle('show', h.scrollTop > 400);
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.container').forEach(c => obs.observe(c));
+  const navLinks = document.querySelectorAll('nav a');
+  const navObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.toggle('active', l.dataset.sec === e.target.id));
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.container').forEach(c => navObs.observe(c));
+  function openLightbox(fig) {
+    const img = fig.querySelector('img');
+    document.getElementById('lb-img').src = img.src;
+    document.getElementById('lb-cap').textContent = fig.querySelector('figcaption')?.textContent || img.alt;
+    document.getElementById('lightbox').classList.add('show');
+  }
+  function closeLightbox(e) {
+    document.getElementById('lightbox').classList.remove('show');
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
 
 </body>
 </html>
