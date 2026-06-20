@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Final SO - Grupo 1 - Arquitecto Cloud</title>
+    <title>Proyecto Final SO - Grupo 1 </title>
     <style>
-        /* Manteniendo tu estilo visual original con mejoras de navegación */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -58,11 +57,13 @@
     <a href="#componente1">C1: Virtualización</a>
     <a href="#componente2">C2: Docker</a>
     <a href="#componente3">C3: Kubernetes</a>
+    <a href="#video">Video</a>
+    <a href="#arquitectura">Arquitectura</a>
     <a href="#conclusiones">Conclusiones</a>
 </nav>
 
 <div class="container" id="home">
-    <h1>🚀 Proyecto Final - Arquitecto Cloud</h1>
+    <h1>Proyecto Final</h1>
     <h3>Sistemas Operativos 750001C</h3>
     <p>Este proyecto integra la configuración de entornos virtuales, contenedores desacoplados y orquestación con Kubernetes para desplegar una infraestructura robusta y escalable.</p>
 </div>
@@ -75,22 +76,21 @@
         </thead>
         <tbody>
             <tr><td>Duber Alvarez Ruiz</td><td>2260403</td><td>Virtualización</td></tr>
-            <tr><td>Maria Jael Barrera Gómez</td><td>2369181</td><td>Documentación</td></tr>
-            <tr><td>Gustavo Adolfo Chilito</td><td>20XXXXXX</td><td>Docker</td></tr>
-            <tr><td>Bradley Suescun Ramírez</td><td>2478054</td><td>Kubernetes</td></tr>
+            <tr><td>Maria Jael Barrera Gómez</td><td>2369181</td><td>Documentación + Sitio Web</td></tr>
+            <tr><td>Gustavo Adolfo Chilito</td><td>2266901</td><td>Documentación + Sitio Webr</td></tr>
+            <tr><td>Bradley Suescun Ramírez</td><td>2478054</td><td>Contenedores Docker + Orquestación con Kubernetes</td></tr>
         </tbody>
     </table>
     <p><strong>Distribuciones:</strong> <code>Ubuntu 24.04 (Gráfica)</code> / <code>Debian 13.5 (Consola)</code></p>
 </div>
 
 <div class="container" id="componente1">
-    <h2>🖥️ Componente 1: Virtualización</h2>
+    <h2>Componente 1: Virtualización</h2>
     <p>Instalación y configuración de dos nodos independientes con aislamiento de red y acceso seguro vía SSH.</p>
     <ul>
         <li><strong>Comandos clave:</strong> <code>ip a</code>, <code>lsblk</code>, <code>ssh usuario@ip</code></li>
     </ul>
-    <!-- Reemplaza con tus capturas reales de virtualización -->
-    <img src="evidencias/captura_particionamiento.png" alt="Evidencia Particionado" class="evidence-img">
+    <img src="evidencias/entorno inicial.png" alt="Evidencia Particionado" class="evidence-img">
 </div>
 
 <div class="container" id="componente2">
@@ -100,8 +100,8 @@
         <li><strong>Frontend:</strong> Nginx en puerto 8080 (mapeado al 80).</li>
         <li><strong>Backend:</strong> Python API en puerto 5000.</li>
     </ul>
-    <img src="evidencias/docker_compose_up_y_estado_servicios.png" alt="Estado Contenedores" class="evidence-img">
-    <img src="evidencias/estructura_archivos_docker.png" alt="Estructura de Archivos" class="evidence-img">
+    <img src="evidencias/Captura de pantalla 2026-06-19 205333.png" alt="Estado Contenedores" class="evidence-img">
+    <img src="evidencias/Captura de pantalla 2026-06-19 205348.png" alt="Estructura de Archivos" class="evidence-img">
 </div>
 
 <div class="container" id="componente3">
@@ -111,33 +111,31 @@
         <li><strong>Servicio:</strong> NodePort expuesto en puerto <code>30080</code>.</li>
         <li><strong>Escalabilidad:</strong> 3 réplicas activas verificadas.</li>
     </ul>
-    <img src="evidencias/k8s_estado_pods_svc_y_escalado_manual.png" alt="Pods y Escalado" class="evidence-img">
-    <img src="evidencias/k8s_acceso_navegador_nodeport_30080.png" alt="Acceso Web K8s" class="evidence-img">
+    <img src="evidencias/Captura de pantalla 2026-06-19 205402.png" alt="Pods y Escalado" class="evidence-img">
+    <img src="evidencias/Captura de pantalla 2026-06-19 205409.png" alt="Acceso Web K8s" class="evidence-img">
 </div>
 
 <div class="container" id="video">
     <h2>🎥 Video Demostrativo</h2>
     <div class="video-container">
-        <!-- Reemplaza el ID de YouTube por el de tu video final -->
         <iframe src="https://www.youtube.com/embed/TU_ID_DE_VIDEO" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 
 <div class="container" id="arquitectura">
     <h2>📊 Diagrama de Arquitectura</h2>
-    <!-- Sube tu diagrama a la carpeta evidencias -->
-    <img src="evidencias/diagrama_arquitectura.png" alt="Arquitectura del Sistema" class="evidence-img">
+    <img src="evidencias/imagen_2026-06-19_204650162.png" alt="Arquitectura del Sistema" class="evidence-img">
 </div>
 
 <div class="container" id="conclusiones">
-    <h2>✅ Conclusiones</h2>
+    <h2>📝 Conclusiones</h2>
     <p><strong>Aprendizaje:</strong> La orquestación con Kubernetes permite una gestión de fallos automática inalcanzable con contenedores individuales.</p>
     <p><strong>Dificultad:</strong> El mapeo de puertos entre el host físico y el clúster de Minikube requirió ajustes en las reglas de firewall.</p>
     <p><strong>Recomendación:</strong> Implementar un pipeline de CI/CD para automatizar las actualizaciones del frontend.</p>
 </div>
 
 <footer>
-    <p>Universidad del Valle • Sede Palmira • 2026</p>
+    <p>Universidad del Valle • Sede Yumbo • 2026</p>
     <p>Facultad de Ingeniería - Sistemas Operativos</p>
 </footer>
 
