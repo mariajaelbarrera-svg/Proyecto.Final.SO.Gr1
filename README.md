@@ -103,7 +103,7 @@ minikube service nginx --url
 ## Componente 4: Sitio Web de Documentación
 
 **URL del sitio:** [https://...]  
-**Video YouTube:** [https://youtu.be/...]
+**Video YouTube:** https://www.youtube.com/watch?v=KcHrIETh3Qw
 
 ### Secciones del sitio
 - Home: introducción y objetivos
