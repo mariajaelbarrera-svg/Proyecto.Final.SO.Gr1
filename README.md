@@ -102,8 +102,8 @@ minikube service nginx --url
 
 ## Componente 4: Sitio Web de Documentación
 
-**URL del sitio:** [https://...]  
-**Video YouTube:** https://www.youtube.com/watch?v=KcHrIETh3Qw
+**URL del sitio:https://mariajaelbarrera-svg.github.io/Proyecto.Final.SO.Gr1/  
+**Video YouTube:https://www.youtube.com/watch?v=kchrieth3qw
 
 ### Secciones del sitio
 - Home: introducción y objetivos
