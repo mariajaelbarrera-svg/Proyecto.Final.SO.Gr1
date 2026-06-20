@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Final - Sistemas Operativos - Grupo 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            padding: 20px;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            text-align: center;
+        }
+        
+        h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        h2 { font-size: 1.3rem; margin-bottom: 1.5rem; color: #a8d8ff; font-weight: 300; }
+        
+        .team-table {
+            width: 100%;
+            margin: 1.5rem 0;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .team-table th, .team-table td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+        }
+        
+        .team-table th { background: rgba(255, 255, 255, 0.1); color: #ffd700; }
+
+        .status-box {
+            display: inline-block;
+            background: #ff4d4d; /* Rojo por defecto (Error) */
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: bold;
+            margin: 1rem 0;
+            transition: background 0.5s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .status-online { background: #4caf50; } /* Verde para éxito */
+        
+        .group-info {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+        }
+        
+        code { color: #ffd700; font-family: monospace; font-size: 1.1rem; }
+        .footer { margin-top: 1.5rem; font-size: 0.85rem; color: #a8d8ff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Frontend Activo</h1>
+        <h2>Sistemas Operativos 750001C</h2>
+        
+        <table class="team-table">
+            <thead>
+                <tr><th>Integrante</th><th>Código</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Duber Alvarez Ruiz</td><td>2260403</td></tr>
+                <tr><td>Maria Jael Barrera Gómez</td><td>2369181</td></tr>
+                <tr><td>Gustavo Adolfo Chilito</td><td>20XXXXXX</td></tr>
+                <tr><td>Bradley Suescun Ramírez</td><td>2478054</td></tr>
+            </tbody>
+        </table>
+
+        <!-- Cuadro de estado dinámico -->
+        <div id="backend-card" class="status-box">
+            <span id="api-status">Esperando conexión con Backend...</span>
+        </div>
+        
+        <div class="group-info">
+            <p><strong>Grupo Asignado:</strong> <code>Grupo 1</code></p>
+            <p><strong>Distribuciones:</strong> <code>Ubuntu 24.04 / Debian 13.5</code></p>
+            <p><strong>Imagen Base:</strong> <code>ubuntu:24.04</code></p>
+        </div>
+        
+        <div class="footer">
+            <p>Universidad del Valle • Sede Regional Palmira</p>
+            <p>Facultad de Ingeniería — Componente 2: Docker</p>
+        </div>
+    </div>
+
+    <script>
+        // Lógica mejorada para mostrar el estado del backend en pantalla
+        const statusBox = document.getElementById('backend-card');
+        const statusText = document.getElementById('api-status');
+
+        fetch('http://localhost:5000')
+            .then(response => response.json())
+            .then(data => {
+                // Si hay respuesta exitosa, cambiamos a verde y mostramos el mensaje del JSON
+                statusBox.classList.add('status-online');
+                statusText.innerHTML = `✅ Backend Online: ${data.mensaje} (Status: ${data.status})`;
+            })
+            .catch(error => {
+                // Si falla, se queda en rojo y muestra el error
+                statusText.innerHTML = "❌ Error: Backend (Puerto 5000) no disponible";
+                console.error('Error de conexión:', error);
+            });
+    </script>
+</body>
+</html>
